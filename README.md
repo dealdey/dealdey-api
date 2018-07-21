@@ -92,7 +92,7 @@ cart_items_count | integer | Number of items in the current cart
 deals | array[deal] | List of deals
 deals.id | string | ID of the deal
 deals.short_title | string | Short title of the deal
-deals.display_sold_out? | booleanboolean |
+deals.display_sold_out? | boolean | Indicates if the sold out or not
 deals.hover_location | string | Location where the deal is available
 deals.is_new_deal? | boolean | Indicates id the deal is a new deal (true) or not (false)
 deals.presale? | boolean | Indicates id the deal is a presale deal (true) or not (false)
@@ -107,7 +107,7 @@ deals.least_priced_variant.discounted_price | decimal | Image URL of the deal
 deals.least_priced_variant.list_price | decimal | Image URL of the deal
 deals.least_priced_variant.variants_have_same_price | integer | Image URL of the deal
 deals.merchant | object | Deal seller
-deals.merchant.id | integer | ID of the seller
+deals.merchant.merchant_id | integer | ID of the seller
 deals.merchant.merchant_name | string | Seller's name
 
 ## Deal Listings per Category
@@ -186,7 +186,9 @@ state_id | integer | 8 | false | ID of the state where the deal is available. De
 
 ### URL Parameter
 
-- deal_id
+param | type | description
+----- | ---- | -----------
+deal_id | integer | ID of the deal
 
 ### Query Parameters
 
@@ -198,7 +200,7 @@ acess_key | string | - | true | Client access key for authenticating all API req
 
 #### Deal with multiple options
 
-> Success 200 OK
+> 200 OK
 
 ```json
 {
@@ -263,74 +265,49 @@ acess_key | string | - | true | Client access key for authenticating all API req
 }
 ```
 
-#### Deal with no multiple options
-
-> 200 OK
-
-```json
-{
-  "deal": {
-    "id": 142453,
-    "short_title": "Microsoft Server 2012 MCSA Course",
-    "permalink": "microsoft-server-2012-mcsa-course-4",
-    "is_product_deal": false,
-    "shippable": false,
-    "address_line1": "10, Akinremi Street, Anifowoshe, Off Awolowo Way, Ikeja, Lagos",
-    "address_line2": "",
-    "discounted_price": 20999,
-    "variants_have_same_price": true,
-    "list_price": 180000,
-    "percent_discount": "88",
-    "shipping_charge_message": "Fedex does not ship to your address: 8 Bode Thomas, Surulere, Ikeja, Lagos",
-    "saving": 159001,
-    "display_sold_quantity": false,
-    "bought_count": 0,
-    "display_remaining_quantity": false,
-    "remaining_quantity": 100,
-    "display_sold_percentage": false,
-    "percent_sold": 0,
-    "show_timer": false,
-    "time_left": 14875119,
-    "offline_deal": false,
-    "available": true,
-    "cancelled": false,
-    "variants_enabled": false,
-    "master_variant_id": 376384,
-    "average_rating": 0,
-    "can_add_feedback": false,
-    "sold_out": false,
-    "cod_available": false,
-    "highlights": "<p>Sold by <b>Sgl technologies</b></p>",
-    "fine_prints": "<li>Terms and conditions apply</li>",
-    "description": "deal description",
-    "main_image": "https://s3.amazonaws.com/rails3.dealdey.com/system/deals/images/142453/main_mobile/mcsa_windowsserver2012.jpg?1462964627",
-    "variant_images": [],
-    "additional_images": [
-        "https://s3.amazonaws.com/rails3.dealdey.com/system/photos/files/181184/main_mobile/open-uri20160509-10727-1rwzibw"
-    ],
-    "carry_go": false,
-    "has_feedbacks": false,
-    "is_added_to_wishlist": false,
-    "store_ribbon": null,
-    "longitude": "3.3842473",
-    "latitude": "6.5083701",
-    "business_name": "SGL Technologies",
-    "phone": "07032830556, 08033064827",
-    "website": "",
-    "merchant": {
-      "merchant_id": 6994,
-      "total_feedbacks": 1,
-      "merchant_name": "SGL Technologies",
-      "merchant_rating": 90.9,
-      "merchant_rating_description": "Excellent",
-      "followers_count": 5,
-      "is_following": false
-    }
-  },
-  "success": true,
-  "error_message": null
-}
-```
+params | type | description
+------ | ---- | -----------
+success | boolean | Status of the response
+deal.id | integer | The deal's unique ID
+deal.short_title | string | Short title of the deal
+deal.permalink | string | Permalink of the deal
+deal.is_product_deal | boolean | Indicates if the item is a product (true) or service (false) deal
+deal.shippable | boolean | Indicates if the item is shippable or not
+deal.address_line1 | string | Line 1 of the deal address
+deal.address_line2 | string | Line 2 of the deal address
+deal.discounted_price | decimal | The deal's discounted price
+deal.variants_have_same_price | boolean | Indicates if the deal has multiple options (false) or not (true)
+deal.list_price | decimal | The deal's original price
+deal.percent_discount | integer | The deal's percentage discount
+deal.saving | decimal | The amount being saved. This is the difference between the list price and the discounted proce
+deal.display_sold_quantity | boolean | Indicates if sold quantity should be displayed (true) or not (false)
+deal.bought_count | integer | The total sold quantity
+deal.display_remaining_quantity | boolean | Indicates if remaining quantity should be displayed (true) or not (false)
+deal.remaining_quantity | integer | The total quantity left
+deal.display_sold_percentage | boolean | Indicates if percentage of deal sold should be displayed (true) or not (false)
+deal.percent_sold | integer | The percentage of deal sold
+deal.show_timer | boolean | Indicates if deal timer should be displayed (true) or not (false)
+deal.time_left | integer | The time left, in seconds, for which the deal would be live and available.
+deal.available | boolean | Indicates if the deal is available (true) or not (false). Only available deals can be purchased
+deal.cancelled | boolean | Indicates if the deal is cancelled (true) or not (false). Cancelled deals cannot be purchased
+deal.variants_enabled | boolean | Indicates if any of the different options for the deal is enabled. Only enabled variants can be bought.<br>Note that it will always be `false` for a deal without multiple options, i.e a deal with `variants_have_same_price = true`
+deal.master_variant_id | integer | The deal's master variant's unique ID
+deal.average_rating | integer | Average rating of the deal
+deal.can_add_feedback | boolean | Indicates if the user can give feedback for the deal (true) or not (false)
+deal.sold_out | boolean | Indicates if the deal is sold out (true) or not (false)
+deal.highlights | string | The deal highlight
+deal.main_image | string | The deal's main image
+deal.additional_images | array[string] | The deal's additional images
+deal.has_feedbacks | boolean | Indicates if the deal has feedback (true) or not (false)
+deal.longitude | float | Longitude of the deal location
+deal.latitude | float | Latitude of the deal location
+deal.business_name | string | The seller's name
+deal.phone | string | The seller's phone number
+deal.website | boolean | The seller's website
+deal.merchant.merchant_id | integer | The seller's unique ID
+deal.merchant.merchant_name | string | The seller's name
+deal.merchant.merchant_rating | boolean | The seller's average rating
+deal.merchant.merchant_rating_description | boolean | The description for the seller's average rating
 
 ## Variants List
 
