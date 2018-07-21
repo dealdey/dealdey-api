@@ -1,4 +1,28 @@
-# DEALDEY API DOCUMENTATION
+# DEALDEY THIRD-PARTY API DOCUMENTATION
+
+## Authentication
+All API requests are authenticated by an access key. Thus access token will be assigned to you.
+
+### HTTP Request
+
+`GET /deals`
+
+### Query Params
+
+params | type |required | description
+--------- | ------- | ------- | -------
+acess_key | string | true | Client access key for authenticating all API requests
+
+### Sample Response for Failed Authentication
+
+> 401 Unauthorized
+```json
+{
+  "success": false,
+  "message": "Invalid Access Key",
+  "code": 101
+}
+```
 
 ## Deal Listings
 
@@ -8,11 +32,13 @@
 
 ### Query Parameters
 
-- access_key
-- auth_token
-- page
-- per_page
-- state_id
+param | type | default | required | description
+----- | ---- | ------- | -------- | ------
+acess_key | string | - | true | Client access key for authenticating all API requests
+page | integer | 1 | false | The page number
+per_page | integer | 10 | false | Maximum number of deals per page
+state_id | integer | 8 | false | ID of the state where the deal is available
+
 
 ### Sample Response
 
@@ -54,28 +80,58 @@
       }
     }
   ],
-  ,
   "cart_items_count": 1,
   "success": true
 }
 ```
 
+params | type | description
+------ | ---- | -----------
+success | boolean | Status of the response
+cart_items_count | integer | Number of items in the current cart
+deals | array[deal] | List of deals
+deals.id | string | ID of the deal
+deals.short_title | string | Short title of the deal
+deals.display_sold_out? | booleanboolean |
+deals.hover_location | string | Location where the deal is available
+deals.is_new_deal? | boolean | Indicates id the deal is a new deal (true) or not (false)
+deals.presale? | boolean | Indicates id the deal is a presale deal (true) or not (false)
+deals.title | string | Title of the deal
+deals.end_date | date | Date the deal ends
+deals.permalink | string | Permalink of the deal
+deals.adult_content | boolean | Indicates the deal is for people from 18years upward.
+deals.average_rating | integer | Average rating of the deal
+deals.least_priced_variant | object | The option with the least price
+deals.least_priced_variant.id | integer | ID of the option
+deals.least_priced_variant.discounted_price | decimal | Image URL of the deal
+deals.least_priced_variant.list_price | decimal | Image URL of the deal
+deals.least_priced_variant.variants_have_same_price | integer | Image URL of the deal
+deals.merchant | object | Deal seller
+deals.merchant.id | integer | ID of the seller
+deals.merchant.merchant_name | string | Seller's name
+
 ## Deal Listings per Category
+
+Returns a list of deals per category.
 
 ### HTTP Request
 
-`GET /categories/<category_id>deals`
+`GET /categories/<category_id>/deals`
 
 ### URL Parameters
-- category_id
+
+param | type | description
+----- | ---- | -----------
+category_id | integer | ID of the categoy
 
 ### Query Parameters
 
-- access_key
-- auth_token
-- page
-- per_page
-- state_id
+param | type | default | required | description
+----- | ---- | ------- | -------- | ------
+acess_key | string | - | true | Client access key for authenticating all API requests
+page | integer | 1 | false | The page number
+per_page | integer | 10 | false | Maximum number of deals per page
+state_id | integer | 8 | false | ID of the state where the deal is available. Default is Lagos
 
 ### Sample Response
 
@@ -83,70 +139,42 @@
 
 ```json
 {
-    "total_entries": 876,
-    "current_page": 1,
-    "per_page": 10,
-    "total_pages": 88,
-    "deals": [
-        {
-            "id": 142759,
-            "short_title": "Baby's Knee Pad | 2pcs",
-            "display_sold_out?": false,
-            "hover_location": "Nationwide Delivery",
-            "is_new_deal?": false,
-            "presale?": false,
-            "title": "Baby's Knee Pad | 2pcs Baby's Knee Pad | 2pcs Baby's Knee Pad | 2pcs Baby's Knee Pad | 2pcs Baby's Knee Pad | 2pcs Baby's Knee Pad | 2pcs Baby's Knee Pad | 2pcs",
-            "keywords": "",
-            "end_date": "2018-12-31",
-            "permalink": "babys-knee-pad-2pcs-5",
-            "adult_content": false,
-            "is_added_to_wishlist": false,
-            "average_rating": 0,
-            "image": "/assets/default/deals/listing_images/S234x146/no-image-deal.png",
-            "mobile_banner_image": null,
-            "web_banner_image": null,
-            "least_priced_variant": {
-                "id": 376872,
-                "discounted_price": 1099,
-                "list_price": 2500,
-                "variants_have_same_price": 1
-            },
-            "merchant": {
-                "merchant_id": 5160,
-                "merchant_name": "Queenjee Graphics Ventures"
-            }
-        },
-        {
-            "id": 142830,
-            "short_title": "setrykujb kdcthfgjlk;,o",
-            "display_sold_out?": false,
-            "hover_location": "Nationwide Delivery",
-            "is_new_deal?": false,
-            "presale?": false,
-            "title": "setrykujb kdcthfgjlk;,o",
-            "keywords": "",
-            "end_date": "2018-12-31",
-            "permalink": "setrykujb-kdcthfgjlko",
-            "adult_content": false,
-            "is_added_to_wishlist": false,
-            "average_rating": 4,
-            "image": "https://s3.amazonaws.com/rails3.dealdey.com/system/deals/listing_images/142830/S234x146/Beacon.PNG?1490274439",
-            "mobile_banner_image": "https://s3.amazonaws.com/rails3.dealdey.com/system/stores/deal_banners/105/S19x35/blog-banner_3.jpg?1510332398",
-            "web_banner_image": "https://s3.amazonaws.com/rails3.dealdey.com/system/stores/deal_banners/105/S36x67/blog-banner_3.jpg?1510332398",
-            "least_priced_variant": {
-                "id": 376960,
-                "discounted_price": 77,
-                "list_price": 100,
-                "variants_have_same_price": 1
-            },
-            "merchant": {
-                "merchant_id": 7233,
-                "merchant_name": "Mz juwon"
-            }
-        }
-    ],
-    "cart_items_count": 2,
-    "success": true
+  "total_entries": 876,
+  "current_page": 1,
+  "per_page": 10,
+  "total_pages": 88,
+  "deals": [
+    {
+      "id": 142759,
+      "short_title": "Baby's Knee Pad | 2pcs",
+      "display_sold_out?": false,
+      "hover_location": "Nationwide Delivery",
+      "is_new_deal?": false,
+      "presale?": false,
+      "title": "Baby's Knee Pad | 2pcs Baby's Knee Pad | 2pcs Baby's Knee Pad | 2pcs Baby's Knee Pad | 2pcs Baby's Knee Pad | 2pcs Baby's Knee Pad | 2pcs Baby's Knee Pad | 2pcs",
+      "keywords": "",
+      "end_date": "2018-12-31",
+      "permalink": "babys-knee-pad-2pcs-5",
+      "adult_content": false,
+      "is_added_to_wishlist": false,
+      "average_rating": 0,
+      "image": "/assets/default/deals/listing_images/S234x146/no-image-deal.png",
+      "mobile_banner_image": null,
+      "web_banner_image": null,
+      "least_priced_variant": {
+          "id": 376872,
+          "discounted_price": 1099,
+          "list_price": 2500,
+          "variants_have_same_price": 1
+      },
+      "merchant": {
+          "merchant_id": 5160,
+          "merchant_name": "Queenjee Graphics Ventures"
+      }
+    }
+  ],
+  "cart_items_count": 2,
+  "success": true
 }
 ```
 
@@ -162,8 +190,9 @@
 
 ### Query Parameters
 
-- access_key
-- auth_token
+param | type | default | required | description
+----- | ---- | ------- | -------- | ------
+acess_key | string | - | true | Client access key for authenticating all API requests
 
 ### Sample Response
 
@@ -428,7 +457,7 @@ Cart with Items
         "id": 63643,
         "cart_sub_total": 14789,
         "error_messages": "",
-        "includes_shipping_item": true // true if deal has shippable items, otherwise false>,
+        "includes_shipping_item": true, // true if deal has shippable items, otherwise false>
         "discounted_amount": 0,
         "cart_items_count": 2,
         "shipping_address": {
