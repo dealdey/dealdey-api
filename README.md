@@ -423,7 +423,7 @@ variant.options | array[option] | The options for the variant
 option.option_type | string | The type of option for the variant, e.g. Color, Size, Weight, Option etc
 option.option_value | string | The value of the type of option. For example<br> - Color could have option value of black, red, blue, white etc <br> - Size could have option value of L, XL, 42, 44, 8 etc <br> - Option could have option value of Option 1, Option 2, Option 3
 
-## Cart Details
+## Create Cart
 
 ### HTTP REQUEST
 
@@ -431,236 +431,179 @@ option.option_value | string | The value of the type of option. For example<br> 
 
 ### Query Parameters
 
-- access_key
-- auth_token
+param | type | default | required | description
+----- | ---- | ------- | -------- | ------
+acess_key | string | - | true | Client access key for authenticating all API requests
 
 ### Sample Response
 
-Cart with Items
-
-> Success 200 OK
-
-```json
-{
-    "success": true,
-    "cart": {
-        "id": 63643,
-        "cart_sub_total": 14789,
-        "error_messages": "",
-        "includes_shipping_item": true, // true if deal has shippable items, otherwise false>
-        "discounted_amount": 0,
-        "cart_items_count": 2,
-        "shipping_address": {
-            "address_line": "8 Bode Thomas, Surulere",
-            "area": "Ikeja",
-            "global": false,
-            "id": 2048006,
-            "landmark": "Lagos",
-            "name": "Adebayo Akinlaja",
-            "state": "Lagos"
-        },
-        "user": {
-            "email": "damilola.ade@dealdey.com",
-            "mobile": "08155917030",
-            "mobile_verified": true
-        },
-        "cart_items": [
-            {
-                "id": 4442075,
-                "deal_id": 142770,
-                "variant_id": 376896,
-                "end_date": "2018-12-31",
-                "quantity": 1,
-                "delivery_option": false,
-                "unit_price": 2790,
-                "total_price": 2790,
-                "image_for_cart": "https://s3.amazonaws.com/rails3.dealdey.com/system/deals/images/142770/S270x168/test_image_main.jpg?1464965132",
-                "available_quantity": 183,
-                "deal": {
-                    "id": 142770,
-                    "short_title": "Test - Stainless Quartz Men's Wristwatch",
-                    "permalink": "test-stainless-quartz-mens-wristwatch",
-                    "is_product_deal": true,
-                    "pickup_locations": []
-                },
-                "variant": {
-                    "option_value_text": ""
-                },
-                "pickup_location": null,
-                "size": null,
-                "error_messages": ""
-            },
-            {
-                "id": 4442076,
-                "deal_id": 142454,
-                "variant_id": 376386,
-                "end_date": "2018-12-31",
-                "quantity": 1,
-                "delivery_option": false,
-                "unit_price": 11999,
-                "total_price": 11999,
-                "image_for_cart": "https://s3.amazonaws.com/rails3.dealdey.com/system/deals/images/142454/S264x139/project.jpg?1462964662",
-                "available_quantity": 198,
-                "deal": {
-                    "id": 142454,
-                    "short_title": "Microsoft Office Project Courses",
-                    "permalink": "microsoft-office-project-courses-4",
-                    "is_product_deal": false,
-                    "pickup_locations": []
-                },
-                "variant": {
-                    "option_value_text": "Option: Option 1"
-                },
-                "pickup_location": null,
-                "size": null,
-                "error_messages": ""
-            }
-        ]
-    },
-    "deals_removed": [],
-    "bestseller_deals": null
-}
-```
-
-Empty Cart
-
-> Success 200 OK
+> 200 OK
 
 ```json
 {
   "success": true,
   "cart": {
-    "id": 63746,
+    "id": 64286,
     "cart_sub_total": 0,
     "error_messages": "",
     "includes_shipping_item": false,
     "discounted_amount": 0,
     "cart_items_count": null,
     "shipping_address": null,
-    "user": {
-      "email": "damilola.ade@dealdey.com",
-      "mobile": "08155917030",
-      "mobile_verified": true
-    },
+    "user": null,
     "cart_items": []
   },
   "deals_removed": [],
   "bestseller_deals": [
     {
-        "id": 140414,
-        "short_title": "Intensive SAP User Training",
-        "display_sold_out?": false,
-        "hover_location": "Multiple Locations",
-        "is_new_deal?": false,
-        "presale?": false,
-        "title": "Intensive SAP User Training",
-        "keywords": null,
-        "end_date": "2018-12-31",
-        "permalink": "intensive-sap-user-training-9",
-        "adult_content": false,
-        "is_added_to_wishlist": false,
-        "average_rating": 0,
-        "image": "https://s3.amazonaws.com/rails3.dealdey.com/system/deals/listing_images/140414/S234x146/SAPP.jpg?1462296522",
-        "mobile_banner_image": null,
-        "web_banner_image": null,
-        "least_priced_variant": {
-            "id": 373136,
-            "discounted_price": 69999,
-            "list_price": 300000,
-            "variants_have_same_price": 1
-        },
-        "merchant": {
-            "merchant_id": 3663,
-            "merchant_name": "Clarionttech Services"
-        }
-    },
-    {
-        "id": 136742,
-        "short_title": "HoT Spa Double Delight Treat",
-        "display_sold_out?": false,
-        "hover_location": "Ikeja, Lagos",
-        "is_new_deal?": false,
-        "presale?": false,
-        "title": "HoT Spa Double Delight Treat",
-        "keywords": null,
-        "end_date": "2018-12-31",
-        "permalink": "hot-spa-double-delight-treat",
-        "adult_content": false,
-        "is_added_to_wishlist": false,
-        "average_rating": 5,
-        "image": "https://s3.amazonaws.com/rails3.dealdey.com/system/deals/listing_images/136742/S234x146/House_of_Tay_Image_2.jpg?1461064032",
-        "mobile_banner_image": null,
-        "web_banner_image": null,
-        "least_priced_variant": {
-            "id": 367407,
-            "discounted_price": 1999,
-            "list_price": 10000,
-            "variants_have_same_price": 0
-        },
-        "merchant": {
-            "merchant_id": 1378,
-            "merchant_name": "House of Tay (Hot Spa)"
-        }
-    },
-    {
-        "id": 134504,
-        "short_title": "Premium Dental Scaling & Polishing",
-        "display_sold_out?": false,
-        "hover_location": "Ikosi, Lagos",
-        "is_new_deal?": false,
-        "presale?": false,
-        "title": "Premium Dental Scaling & Polishing",
-        "keywords": null,
-        "end_date": "2018-12-31",
-        "permalink": "premium-dental-scaling-polishing-10",
-        "adult_content": false,
-        "is_added_to_wishlist": false,
-        "average_rating": 0,
-        "image": "https://s3.amazonaws.com/rails3.dealdey.com/system/deals/listing_images/134504/S234x146/C__281_29.jpg?1460379576",
-        "mobile_banner_image": null,
-        "web_banner_image": null,
-        "least_priced_variant": {
-            "id": 363615,
-            "discounted_price": 799,
-            "list_price": 6000,
-            "variants_have_same_price": 1
-        },
-        "merchant": {
-            "merchant_id": 652,
-            "merchant_name": "Platinum Dental Surgery Clinic"
-        }
-    },
-    {
-        "id": 137812,
-        "short_title": "Luxury Spa Day Pampering Package",
-        "display_sold_out?": false,
-        "hover_location": "Victoria Island, Lagos",
-        "is_new_deal?": false,
-        "presale?": false,
-        "title": "Luxury Spa Day Pampering Package",
-        "keywords": "",
-        "end_date": "2018-12-31",
-        "permalink": "luxury-spa-day-pampering-package",
-        "adult_content": false,
-        "is_added_to_wishlist": false,
-        "average_rating": 4,
-        "image": "https://s3.amazonaws.com/rails3.dealdey.com/system/deals/listing_images/137812/S234x146/Indy_Spa.jpg?1461455623",
-        "mobile_banner_image": "https://s3.amazonaws.com/rails3.dealdey.com/system/stores/deal_banners/103/S19x35/7.jpg?1489575077",
-        "web_banner_image": "https://s3.amazonaws.com/rails3.dealdey.com/system/stores/deal_banners/103/S36x67/7.jpg?1489575077",
-        "least_priced_variant": {
-            "id": 368928,
-            "discounted_price": 4500,
-            "list_price": 25000,
-            "variants_have_same_price": 0
-        },
-        "merchant": {
-            "merchant_id": 3260,
-            "merchant_name": "Indy Salon & Spa"
-        }
+      "id": 140414,
+      "short_title": "Intensive SAP User Training",
+      "display_sold_out?": false,
+      "hover_location": "Multiple Locations",
+      "is_new_deal?": false,
+      "presale?": false,
+      "title": "Intensive SAP User Training",
+      "keywords": null,
+      "end_date": "2018-12-31",
+      "permalink": "intensive-sap-user-training-9",
+      "adult_content": false,
+      "is_added_to_wishlist": false,
+      "average_rating": 0,
+      "image": "https://s3.amazonaws.com/rails3.dealdey.com/system/deals/listing_images/140414/S234x146/SAPP.jpg?1462296522",
+      "mobile_banner_image": null,
+      "web_banner_image": null,
+      "least_priced_variant": {
+        "id": 373136,
+        "discounted_price": 69999,
+        "list_price": 300000,
+        "variants_have_same_price": 1
+      },
+      "merchant": {
+        "merchant_id": 3663,
+        "merchant_name": "Clarionttech Services"
+      }
     }
   ]
 }
 ```
+
+### Response Description
+
+params | type | description
+------ | ---- | -----------
+success | boolean | Status of the response. `true` if there's no error, `false` otherwise.
+cart.id | integer | The cart's unique ID
+cart.cart_sub_total | integer | The total value of the items in the cart. `0` for empty cart.
+cart.error_messages | null,string | Error messages. `null` if there's no error
+cart.includes_shipping_item | integer | Indicates if the cart contains a shippable item (true) or not (false). If `true`, the user would be required to provide a shipping address.
+cart.discounted_amount | integer | The discount on the cart gotten from using a promo code.
+cart.cart_items_count | null | The number of items in the cart
+cart.shipping_address | null | The cart shipping address provided by the user.
+cart.user | null | The user assigned to the cart
+cart.cart_items | array[cart_item] | List of items in the cart. `[]` for a newly created cart.
+deals_removed | array[string] | List of items automtically removed from the cart. An item that is no longer available would be automatically removed from the cart
+best_sellers | array[deal] | List of best selling deals
+
+
+## Add Item to Cart
+
+Adding an item (or deal) to the cart.
+> Adding an item already in the cart only increments the quantity by 1
+
+### HTTP Request
+
+`POST carts/<cart_id>/cart_items`
+
+### URL Parameter
+
+param | type | description
+----- | ---- | -----------
+cart_id | integer | The cart's unique ID
+
+### Query Parameters
+
+param | type | default | required | description
+----- | ---- | ------- | -------- | ------
+acess_key | string | - | true | Client access key for authenticating all API requests
+
+### Sample Response
+
+```json
+{
+  "success": true,
+  "error_message": null,
+  "cart": {
+    "id": 270,
+    "cart_sub_total": 50,
+    "error_messages": "",
+    "includes_shipping_item": true,
+    "discounted_amount": 0,
+    "cart_items_count": 1,
+    "shipping_address": null,
+    "user": null,
+    "cart_items": [
+      {
+        "id": 22,
+        "deal_id": 32,
+        "variant_id": 31,
+        "end_date": "2018-11-30",
+        "quantity": 1,
+        "delivery_option": false,
+        "unit_price": 50,
+        "total_price": 50,
+        "image_for_cart": "https://s3.amazonaws.com/dev.dealdey.com/system/deals/images/32/S270x168/vim_pikender.png?1453818890",
+        "available_quantity": 61,
+        "deal": {
+          "id": 32,
+          "short_title": "Test Deal Position",
+          "permalink": "test-deal-position",
+          "is_product_deal": true,
+          "pickup_locations": []
+        },
+        "variant": {
+          "option_value_text": ""
+        },
+        "pickup_location": null,
+        "size": null,
+        "error_messages": ""
+      }
+    ]
+  },
+  "deals_removed": [],
+  "bestseller_deals": null
+}
+```
+
+params | type | description
+------ | ---- | -----------
+success | boolean | Status of the response. `true` if there's no error, `false` otherwise.
+cart.error_messages | null,string | Error message. `null` if there's no error
+cart.id | integer | The cart's unique ID
+cart.cart_sub_total | integer | The total value of the items in the cart. `0` for empty cart.
+cart.error_messages | null,string | Error messages. `null` if there's no error
+cart.includes_shipping_item | integer | Indicates if the cart contains a shippable item (true) or not (false). If `true`, the user would be required to provide a shipping address.
+cart.discounted_amount | integer | The discount on the cart gotten from using a promo code.
+cart.cart_items_count | integer | The number of items in the cart
+cart.shipping_address | null | The cart shipping address provided by the user.
+cart.user | null | The user assigned to the cart
+cart.cart_items | array[cart_item] | A list of items in the cart
+cart_item.id | integer | The cart item's unique ID
+cart_item.deal_id | integer | The ID of the deal in the cart
+cart_item.variant_id | integer | The ID of the variant of the deal in the cart
+cart_item.end_date | date | The end date of the deal
+cart_item.quantity | integer | The quantity of the cart item
+cart_item.delivery_option | boolean |
+cart_item.unit_price | float | The price of one cart item
+cart_item.total_price | float | The total price of the all the quantity of the cart item
+cart_item.image_for_cart | string | The image url of the deal in the cart
+cart_item.available_quantity | integer | The available quantity.
+cart_item.pickup_location | string | The selected redemption location for the cart item
+cart_item.error_messages | integer |
+cart_item.deal.pickup_locations | array[pickup_location] | A list of all possible redemption locations for the deal
+cart_item.variant.option_value_text | string | The descriptive name of the variant of the deal in the cart
+deals_removed | array[string] | List of items automtically removed from the cart. An item that is no longer available would be automatically removed from the cart
+best_sellers | null,array[deal] | List of best selling deals. `null` if there are items in the cart.
+
 
 ## Increase/Decrease Cart Item Quantity
 
