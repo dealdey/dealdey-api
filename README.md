@@ -801,73 +801,47 @@ See error at `cart.error_messages`
 ```
 
 
-## Remove item from Cart
+## Remove Item from Cart
 
 ### HTTP Request
+
 `POST /cart_items/<cart_item_id>/remove`
 
 ### URL Params
-- cart_item_id
+
+param | type | description
+----- | ---- | -----------
+cart_id | integer | The cart's unique ID
 
 ### Query Params
-- auth_token
-- access_key
 
-### Sample Responses
+param | type | default | required | description
+----- | ---- | ------- | -------- | ------
+acess_key | string | - | true | Client access key for authenticating all API requests
+
+The response is similar to the same response for Add to Cart but the cart item will no longer be in the list of cart items
+
+### Sample Response
+
+If the item is not in the cart.
+
+> 404 Not Found
 
 ```json
 {
-    "success": false,
-    "cart": {
-        "id": 63643,
-        "cart_sub_total": 11999,
-        "error_messages": "Cart Item not found",
-        "includes_shipping_item": false,
-        "discounted_amount": 0,
-        "cart_items_count": 1,
-        "shipping_address": {
-            "address_line": "8 Bode Thomas, Surulere",
-            "area": "Ikeja",
-            "global": false,
-            "id": 2048006,
-            "landmark": "Lagos",
-            "name": "Adebayo Akinlaja",
-            "state": "Lagos"
-        },
-        "user": {
-            "email": "damilola.ade@dealdey.com",
-            "mobile": "08155917030",
-            "mobile_verified": true
-        },
-        "cart_items": [
-            {
-                "id": 4442076,
-                "deal_id": 142454,
-                "variant_id": 376386,
-                "end_date": "2018-12-31",
-                "quantity": 1,
-                "delivery_option": false,
-                "unit_price": 11999,
-                "total_price": 11999,
-                "image_for_cart": "https://s3.amazonaws.com/rails3.dealdey.com/system/deals/images/142454/S264x139/project.jpg?1462964662",
-                "available_quantity": 198,
-                "deal": {
-                    "id": 142454,
-                    "short_title": "Microsoft Office Project Courses",
-                    "permalink": "microsoft-office-project-courses-4",
-                    "is_product_deal": false,
-                    "pickup_locations": []
-                },
-                "variant": {
-                    "option_value_text": "Option: Option 1"
-                },
-                "pickup_location": null,
-                "size": null,
-                "error_messages": ""
-            }
-        ]
-    },
-    "deals_removed": [],
-    "bestseller_deals": null
+  "success": false,
+  "cart": {
+    "id": 63643,
+    "cart_sub_total": 11999,
+    "error_messages": "Cart Item not found",
+    "includes_shipping_item": false,
+    "discounted_amount": 0,
+    "cart_items_count": 1,
+    "shipping_address": null,
+    "user": null,
+    "cart_items": [<cart_items>]
+  },
+  "deals_removed": [],
+  "bestseller_deals": null
 }
 ```
