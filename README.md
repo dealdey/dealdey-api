@@ -598,7 +598,7 @@ cart_item.total_price | float | The total price of the all the quantity of the c
 cart_item.image_for_cart | string | The image url of the deal in the cart
 cart_item.available_quantity | integer | The available quantity.
 cart_item.pickup_location | string | The selected redemption location for the cart item
-cart_item.error_messages | integer |
+cart_item.error_messages | integer | The errors associated with the cart item
 cart_item.deal.pickup_locations | array[pickup_location] | A list of all possible redemption locations for the deal
 cart_item.variant.option_value_text | string | The descriptive name of the variant of the deal in the cart
 deals_removed | array[string] | List of items automtically removed from the cart. An item that is no longer available would be automatically removed from the cart
@@ -608,222 +608,198 @@ best_sellers | null,array[deal] | List of best selling deals. `null` if there ar
 ## Increase/Decrease Cart Item Quantity
 
 ### HTTP Request
+
 `POST /cart_items/<cart_item_id>/change_quantity`
 
 ### URL Parameter
-- cart_item_id
+
+param | type | description
+----- | ---- | -----------
+cart_id | integer | The cart's unique ID
 
 ### Query Parameter
 
-- auth_token
-- access_key
+param | type | default | required | description
+----- | ---- | ------- | -------- | ------
+acess_key | string | - | true | Client access key for authenticating all API requests
 
 ### Body Parameter
 
-- quantity. The new quantity of the cart item. It must be greater then 0 and not greater then the maximum available quantity
+param | type | default | required | description
+----- | ---- | ------- | -------- | ------
+quantity | integer | - | true | The new quantity of the cart item. It must be greater then 0 and not greater then the maximum available quantity
 
 ### Sample Responses
 
+For `quantity = 5` and `cart_id = 4442076`, The quantity will be updated to 5. Check `cart_item.quantity`.
+
 ``` json
 {
-    "success": true,
-    "cart": {
-        "id": 63643,
-        "cart_sub_total": 25949,
-        "error_messages": "",
-        "includes_shipping_item": true,
-        "discounted_amount": 0,
-        "cart_items_count": 2,
-        "shipping_address": {
-            "address_line": "8 Bode Thomas, Surulere",
-            "area": "Ikeja",
-            "global": false,
-            "id": 2048006,
-            "landmark": "Lagos",
-            "name": "Adebayo Akinlaja",
-            "state": "Lagos"
+  "success": true,
+  "cart": {
+    "id": 63643,
+    "cart_sub_total": 25949,
+    "error_messages": "",
+    "includes_shipping_item": true,
+    "discounted_amount": 0,
+    "cart_items_count": 2,
+    "shipping_address": null,
+    "user": null,
+    "cart_items": [
+      {
+        "id": 4442075,
+        "deal_id": 142770,
+        "variant_id": 376896,
+        "end_date": "2018-12-31",
+        "quantity": 5,
+        "delivery_option": false,
+        "unit_price": 2790,
+        "total_price": 13950,
+        "image_for_cart": "https://s3.amazonaws.com/rails3.dealdey.com/system/deals/images/142770/S270x168/test_image_main.jpg?1464965132",
+        "available_quantity": 183,
+        "deal": {
+          "id": 142770,
+          "short_title": "Test - Stainless Quartz Men's Wristwatch",
+          "permalink": "test-stainless-quartz-mens-wristwatch",
+          "is_product_deal": true,
+          "pickup_locations": []
         },
-        "user": {
-            "email": "damilola.ade@dealdey.com",
-            "mobile": "08155917030",
-            "mobile_verified": true
+        "variant": {
+          "option_value_text": ""
         },
-        "cart_items": [
-            {
-                "id": 4442075,
-                "deal_id": 142770,
-                "variant_id": 376896,
-                "end_date": "2018-12-31",
-                "quantity": 5, // quantity has been updated to 5
-                "delivery_option": false,
-                "unit_price": 2790,
-                "total_price": 13950,
-                "image_for_cart": "https://s3.amazonaws.com/rails3.dealdey.com/system/deals/images/142770/S270x168/test_image_main.jpg?1464965132",
-                "available_quantity": 183,
-                "deal": {
-                    "id": 142770,
-                    "short_title": "Test - Stainless Quartz Men's Wristwatch",
-                    "permalink": "test-stainless-quartz-mens-wristwatch",
-                    "is_product_deal": true,
-                    "pickup_locations": []
-                },
-                "variant": {
-                    "option_value_text": ""
-                },
-                "pickup_location": null,
-                "size": null,
-                "error_messages": ""
-            },
-            {
-                "id": 4442076,
-                "deal_id": 142454,
-                "variant_id": 376386,
-                "end_date": "2018-12-31",
-                "quantity": 1,
-                "delivery_option": false,
-                "unit_price": 11999,
-                "total_price": 11999,
-                "image_for_cart": "https://s3.amazonaws.com/rails3.dealdey.com/system/deals/images/142454/S264x139/project.jpg?1462964662",
-                "available_quantity": 198,
-                "deal": {
-                    "id": 142454,
-                    "short_title": "Microsoft Office Project Courses",
-                    "permalink": "microsoft-office-project-courses-4",
-                    "is_product_deal": false,
-                    "pickup_locations": []
-                },
-                "variant": {
-                    "option_value_text": "Option: Option 1"
-                },
-                "pickup_location": null,
-                "size": null,
-                "error_messages": ""
-            }
-        ]
-    },
-    "deals_removed": [],
-    "bestseller_deals": null
+        "pickup_location": null,
+        "size": null,
+        "error_messages": ""
+      },
+      {
+        "id": 4442076,
+        "deal_id": 142454,
+        "variant_id": 376386,
+        "end_date": "2018-12-31",
+        "quantity": 1,
+        "delivery_option": false,
+        "unit_price": 11999,
+        "total_price": 11999,
+        "image_for_cart": "https://s3.amazonaws.com/rails3.dealdey.com/system/deals/images/142454/S264x139/project.jpg?1462964662",
+        "available_quantity": 198,
+        "deal": {
+          "id": 142454,
+          "short_title": "Microsoft Office Project Courses",
+          "permalink": "microsoft-office-project-courses-4",
+          "is_product_deal": false,
+          "pickup_locations": []
+        },
+        "variant": {
+          "option_value_text": "Option: Option 1"
+        },
+        "pickup_location": null,
+        "size": null,
+        "error_messages": ""
+      }
+    ]
+  },
+  "deals_removed": [],
+  "bestseller_deals": null
 }
 ```
 
-When new quantity is more than the available quantity
+When new quantity is more than the available quantity.
+See error at `cart_item.error_messages`
 
 ```json
 {
-    "success": false,
-    "cart": {
-        "id": 63643,
-        "cart_sub_total": 20369,
-        "error_messages": "",
-        "includes_shipping_item": true,
-        "discounted_amount": 0,
-        "cart_items_count": 2,
-        "shipping_address": {
-            "address_line": "8 Bode Thomas, Surulere",
-            "area": "Ikeja",
-            "global": false,
-            "id": 2048006,
-            "landmark": "Lagos",
-            "name": "Adebayo Akinlaja",
-            "state": "Lagos"
+  "success": false,
+  "cart": {
+    "id": 63643,
+    "cart_sub_total": 20369,
+    "error_messages": "",
+    "includes_shipping_item": true,
+    "discounted_amount": 0,
+    "cart_items_count": 2,
+    "shipping_address":null,
+    "user": null,
+    "cart_items": [
+      {
+        "id": 4442075,
+        "deal_id": 142770,
+        "variant_id": 376896,
+        "end_date": "2018-12-31",
+        "quantity": 3,
+        "delivery_option": false,
+        "unit_price": 2790,
+        "total_price": 8370,
+        "image_for_cart": "https://s3.amazonaws.com/rails3.dealdey.com/system/deals/images/142770/S270x168/test_image_main.jpg?1464965132",
+        "available_quantity": 183,
+        "deal": {
+          "id": 142770,
+          "short_title": "Test - Stainless Quartz Men's Wristwatch",
+          "permalink": "test-stainless-quartz-mens-wristwatch",
+          "is_product_deal": true,
+          "pickup_locations": []
         },
-        "user": {
-            "email": "damilola.ade@dealdey.com",
-            "mobile": "08155917030",
-            "mobile_verified": true
+        "variant": {
+          "option_value_text": ""
         },
-        "cart_items": [
-            {
-                "id": 4442075,
-                "deal_id": 142770,
-                "variant_id": 376896,
-                "end_date": "2018-12-31",
-                "quantity": 3,
-                "delivery_option": false,
-                "unit_price": 2790,
-                "total_price": 8370,
-                "image_for_cart": "https://s3.amazonaws.com/rails3.dealdey.com/system/deals/images/142770/S270x168/test_image_main.jpg?1464965132",
-                "available_quantity": 183,
-                "deal": {
-                    "id": 142770,
-                    "short_title": "Test - Stainless Quartz Men's Wristwatch",
-                    "permalink": "test-stainless-quartz-mens-wristwatch",
-                    "is_product_deal": true,
-                    "pickup_locations": []
-                },
-                "variant": {
-                    "option_value_text": ""
-                },
-                "pickup_location": null,
-                "size": null,
-                "error_messages": "Quantity for Test - Stainless Quartz Men's Wristwatch should not exceed 183."
-            },
-            {
-                "id": 4442076,
-                "deal_id": 142454,
-                "variant_id": 376386,
-                "end_date": "2018-12-31",
-                "quantity": 1,
-                "delivery_option": false,
-                "unit_price": 11999,
-                "total_price": 11999,
-                "image_for_cart": "https://s3.amazonaws.com/rails3.dealdey.com/system/deals/images/142454/S264x139/project.jpg?1462964662",
-                "available_quantity": 198,
-                "deal": {
-                    "id": 142454,
-                    "short_title": "Microsoft Office Project Courses",
-                    "permalink": "microsoft-office-project-courses-4",
-                    "is_product_deal": false,
-                    "pickup_locations": []
-                },
-                "variant": {
-                    "option_value_text": "Option: Option 1"
-                },
-                "pickup_location": null,
-                "size": null,
-                "error_messages": ""
-            }
-        ]
-    },
-    "deals_removed": [],
-    "bestseller_deals": null
+        "pickup_location": null,
+        "size": null,
+        "error_messages": "Quantity for Test - Stainless Quartz Men's Wristwatch should not exceed 183."
+      },
+      {
+        "id": 4442076,
+        "deal_id": 142454,
+        "variant_id": 376386,
+        "end_date": "2018-12-31",
+        "quantity": 1,
+        "delivery_option": false,
+        "unit_price": 11999,
+        "total_price": 11999,
+        "image_for_cart": "https://s3.amazonaws.com/rails3.dealdey.com/system/deals/images/142454/S264x139/project.jpg?1462964662",
+        "available_quantity": 198,
+        "deal": {
+          "id": 142454,
+          "short_title": "Microsoft Office Project Courses",
+          "permalink": "microsoft-office-project-courses-4",
+          "is_product_deal": false,
+          "pickup_locations": []
+        },
+        "variant": {
+          "option_value_text": "Option: Option 1"
+        },
+        "pickup_location": null,
+        "size": null,
+        "error_messages": ""
+      }
+    ]
+  },
+  "deals_removed": [],
+  "bestseller_deals": null
 }
 ```
 
-When cart item is not in the cart
+When cart item is not in the cart.
+See error at `cart.error_messages`
 
 > 404 Not Found
 
 ```json
 {
-    "success": false,
-    "cart": {
-        "id": 63643,
-        "cart_sub_total": 14789,
-        "error_messages": "Cart Item not found",
-        "includes_shipping_item": true,
-        "discounted_amount": 0,
-        "cart_items_count": 2,
-        "shipping_address": {
-            "address_line": "8 Bode Thomas, Surulere",
-            "area": "Ikeja",
-            "global": false,
-            "id": 2048006,
-            "landmark": "Lagos",
-            "name": "Adebayo Akinlaja",
-            "state": "Lagos"
-        },
-        "user": {
-            "email": "damilola.ade@dealdey.com",
-            "mobile": "08155917030",
-            "mobile_verified": true
-        },
-        "cart_items": [<cart_items>]
-    },
-    "deals_removed": [],
-    "bestseller_deals": null
+  "success": false,
+  "cart": {
+    "id": 63643,
+    "cart_sub_total": 14789,
+    "error_messages": "Cart Item not found",
+    "includes_shipping_item": true,
+    "discounted_amount": 0,
+    "cart_items_count": 2,
+    "shipping_address": null,
+    "user": null,
+    "cart_items": [<cart_items>]
+  },
+  "deals_removed": [],
+  "bestseller_deals": null
 }
 ```
+
 
 ## Remove item from Cart
 
