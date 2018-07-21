@@ -319,15 +319,19 @@ This is for deals that have multiple options. Returns a list of options availabl
 
 ### URL Parameter
 
-- deal_id
+param | type | description
+----- | ---- | -----------
+deal_id | integer | ID of the deal
 
 ### Query Parameters
-- access_key
-- auth_token
+
+param | type | default | required | description
+----- | ---- | ------- | -------- | ------
+acess_key | string | - | true | Client access key for authenticating all API requests
 
 ### Sample Response
 
-If deal has multiple options
+For a deal has multiple options
 
 > Success 200 OK
 
@@ -365,32 +369,12 @@ If deal has multiple options
         }
       ],
       "image_id": null
-    },
-    {
-      "id": 376387,
-      "percent_discount": 60.0033333333333333,
-      "saving": 18001,
-      "discounted_price": 11999,
-      "list_price": 30000,
-      "bought_count": 0,
-      "remaining_quantity": 200,
-      "percent_sold": 0,
-      "sold_out": false,
-      "options_text": "Option: Option 2",
-      "image": "https://s3.amazonaws.com/rails3.dealdey.com/system/deals/images/142454/S670x414/project.jpg?1462964662",
-      "options": [
-        {
-          "option_type": "Option",
-          "option_value": "Option 2"
-        }
-      ],
-      "image_id": null
     }
   ]
 }
 ```
 
-If deal has no options. _You would not have to make this type of request. It's just been added for information purpose._
+For deal without multiple options. _You would not have to make this type of request. It's just been added for information purpose._
 > Success 200 OK
 ```json
 {
@@ -409,6 +393,35 @@ If deal has no options. _You would not have to make this type of request. It's j
   "variants": null
 }
 ```
+
+### Response Description
+
+params | type | description
+------ | ---- | -----------
+success | boolean | Status of the response. `true` if there's no error, `false` otherwise.
+error_message | null,string | Error message. `null` if there's no error
+deal.id | integer | The deal's unique ID
+deal.permalink | string | Permalink of the deal
+deal.limit_quantity_from_deal | boolean |
+deal.is_product_deal | boolean | Indicates if the item is a product (true) or service (false) deal
+deal.display_sold_quantity | boolean | Indicates if sold quantity should be displayed (true) or not (false)
+deal.display_remaining_quantity | boolean | Indicates if remaining quantity should be displayed (true) or not (false)
+deal.display_sold_percentage | boolean | Indicates if percentage of deal sold should be displayed (true) or not (false)
+deal.variants_have_same_price | boolean | Indicates if the deal has multiple options (false) or not (true)
+variants | array[variant] | List of deal options
+variant.id | integer | The variants' unique ID
+variant.percent_discount | float | The variant's percentage discount
+variant.saving | float | The amount being saved. This is the difference between the list price and the discounted proce
+variant.list_price | float | The variant's original price
+variant.bought_count | integer | The total sold quantity
+variant.remaining_quantity | integer | The total quantity left
+variant.percent_sold | integer | The percentage of variant sold
+variant.sold_out | boolean | Indicates if the variant is sold out (true) or not (false)
+variant.options_text | string | The descriptive name of the variant
+variant.image | string | The variant's image url
+variant.options | array[option] | The options for the variant
+option.option_type | string | The type of option for the variant, e.g. Color, Size, Weight, Option etc
+option.option_value | string | The value of the type of option. For example<br> - Color could have option value of black, red, blue, white etc <br> - Size could have option value of L, XL, 42, 44, 8 etc <br> - Option could have option value of Option 1, Option 2, Option 3
 
 ## Cart Details
 
