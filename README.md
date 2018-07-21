@@ -845,3 +845,44 @@ If the item is not in the cart.
   "bestseller_deals": null
 }
 ```
+
+## Cart Details
+
+### HTTP Request
+
+`GET /carts/<cart_id>`
+
+### URL Params
+
+param | type | description
+----- | ---- | -----------
+cart_id | integer | The cart's unique ID
+
+### Query Params
+
+param | type | default | required | description
+----- | ---- | ------- | -------- | ------
+acess_key | string | - | true | Client access key for authenticating all API requests
+
+### Sample Response
+
+> 200 OK
+
+```json
+{
+  "success": true,
+  "cart": {
+    "id": 63643,
+    "cart_sub_total": 14789,
+    "error_messages": "",
+    "includes_shipping_item": true,
+    "discounted_amount": 0,
+    "cart_items_count": 2,
+    "shipping_address": null,
+    "user": null,
+    "cart_items": [<cart_items>]
+  },
+  "deals_removed": [],
+  "bestseller_deals": null
+}
+```
