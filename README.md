@@ -886,3 +886,161 @@ acess_key | string | - | true | Client access key for authenticating all API req
   "bestseller_deals": null
 }
 ```
+
+
+## Change Pickup Location
+
+For service deals with multiple redemption locations, you will be required to pick one pickup location.
+
+Before choosing a pickup location, the `cart_item.pickup_location` is `null`
+
+### HTTP REQUEST
+
+Use this request to choose a pickup location for the cart item
+
+`POST /carts/<cart_id>/cart_items/<cart_item_id>/change_pickup_location`
+
+### URL Params
+
+param | type | description
+----- | ---- | -----------
+cart_id | integer | The cart's unique ID
+cart_item_id | integer | The cart item's unique ID
+
+### Query Param
+
+param | type | default | required | description
+----- | ---- | ------- | -------- | ------
+acess_key | string | - | true | Client access key for authenticating all API requests
+
+### Body Param
+
+param | type | reqiured | description
+----- | ---- | -------- | -----------
+pickup_location_id | integer | true | The pickup location's unique ID
+
+### Sample Responses
+
+> 200 OK
+
+```json
+{
+  "success": true,
+  "cart": {
+    "id": 64286,
+    "cart_sub_total": 8500,
+    "error_messages": "",
+    "includes_shipping_item": false,
+    "discounted_amount": 0,
+    "cart_items_count": 1,
+    "shipping_address": null,
+    "user": null,
+    "cart_items": [
+      {
+        "id": 4442092,
+        "deal_id": 81839,
+        "variant_id": 271803,
+        "end_date": "2018-12-31",
+        "quantity": 1,
+        "delivery_option": false,
+        "unit_price": 8500,
+        "total_price": 8500,
+        "image_for_cart": "https://s3.amazonaws.com/rails3.dealdey.com/system/deals/images/81839/S270x168/1553643_1.jpg?1444124345",
+        "available_quantity": 20,
+        "deal": {
+          "id": 81839,
+          "short_title": "David Wej Reversible D Buckle Belt",
+          "permalink": "david-wej-reversible-d-buckle-belt",
+          "is_product_deal": true,
+          "pickup_locations": [
+            {
+              "id": 55819,
+              "address": "27b, Idowu Martins Street, Off Adeola Odeku Street, Victoria Island, , Agbado/Oke-Odo, Lagos"
+            },
+            {
+              "id": 55820,
+              "address": "44, Opebi Road, Ikeja, Lagos"
+            },
+            {
+              "id": 55821,
+              "address": "25, Adeniran Ogunsanya Street, Surulere, Lagos."
+            },
+            {
+              "id": 55822,
+              "address": "142, Bode Thomas Street, Surulere, Lagos."
+            }
+          ]
+        },
+        "variant": {
+          "option_value_text": "Colour: Silver"
+        },
+        "pickup_location": {
+          "id": 67243,
+          "address": "27b, Idowu Martins Street, Off Adeola Odeku Street, Victoria Island, , Agbado/Oke-Odo, Lagos"
+        },
+        "size": null,
+        "error_messages": ""
+      }
+    ]
+  },
+  "deals_removed": [],
+  "bestseller_deals": null
+}
+```
+
+### Response Description
+
+params | type | description
+------ | ---- | -----------
+cart_item.pickup_location.id | integer | The assigned pickup location's unique ID
+cart_item.pickup_location.address | string | The address of the assigned pickup location
+cart_item.deal.pickup_locations | array[pickup_location] | A list of all possible redemption locations for the deal
+pickup_location.id | integer | The pickup location's unique ID
+pickup_location.address | string | The address of the pickup location
+
+If pickup location is not found, `cart.error_messages` will be `Pickup Location not found`
+
+```json
+{
+  "success": true,
+  "cart": {
+    "id": 64286,
+    "cart_sub_total": 8500,
+    "error_messages": "Pickup Location not found",
+    "includes_shipping_item": false,
+    "discounted_amount": 0,
+    "cart_items_count": 1,
+    "shipping_address": null,
+    "user": null,
+    "cart_items": [
+      {
+        "id": 4442092,
+        "deal_id": 81839,
+        "variant_id": 271803,
+        "end_date": "2018-12-31",
+        "quantity": 1,
+        "delivery_option": false,
+        "unit_price": 8500,
+        "total_price": 8500,
+        "image_for_cart": "https://s3.amazonaws.com/rails3.dealdey.com/system/deals/images/81839/S270x168/1553643_1.jpg?1444124345",
+        "available_quantity": 20,
+        "deal": {
+          "id": 81839,
+          "short_title": "David Wej Reversible D Buckle Belt",
+          "permalink": "david-wej-reversible-d-buckle-belt",
+          "is_product_deal": true,
+          "pickup_locations": [<pickup_locations>]
+        },
+        "variant": {
+          "option_value_text": "Colour: Silver"
+        },
+        "pickup_location": null,
+        "size": null,
+        "error_messages": ""
+      }
+    ]
+  },
+  "deals_removed": [],
+  "bestseller_deals": null
+}
+```
