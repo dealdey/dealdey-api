@@ -1044,3 +1044,164 @@ If pickup location is not found, `cart.error_messages` will be `Pickup Location 
   "bestseller_deals": null
 }
 ```
+
+## Create Shipping Address
+
+A shipping address is required for a cart that contains at least a shippable item.
+
+### HTTP Request
+
+`POST /carts/<cart_id>/shipping_address`
+
+### Body Parameters
+
+param | type | reqiured | description
+----- | ---- | -------- | -----------
+shipping_address.name | string | true | Name of the shipping address
+shipping_address.address_line | string | true | The shipping address
+shipping_address.state | string | true | The state where the address is located
+shipping_address.area | string | true | The area within the selected state
+shipping_address.landmark | string | false | The landmark for the shipping address
+
+### Sample Response
+
+```json
+{
+  "success": true,
+  "errors": {},
+  "shipping_address": {
+    "id": 588,
+    "name": "Oluwasegun",
+    "address_line": "19 Taike Street",
+    "landmark": "Love All Street",
+    "area": "Ikeja",
+    "state": "Lagos"
+  },
+  "cart": null,
+  "deals_removed": [],
+  "bestseller_deals": null
+}
+```
+
+The response for request `GET /carts/<cart_id>` for a cart with a shipping address
+
+```json
+{
+  "success": true,
+  "cart": {
+    "id": 270,
+    "cart_sub_total": 250,
+    "error_messages": "",
+    "includes_shipping_item": true,
+    "discounted_amount": 0,
+    "cart_items_count": 1,
+    "shipping_address": {
+      "address_line": "19 Taike Street",
+      "area": "Ikeja",
+      "global": false,
+      "id": 588,
+      "landmark": "Love All Street",
+      "name": "Oluwasegun",
+      "state": "Lagos"
+    },
+    "user": null,
+    "cart_items": [<cart_items>]
+  },
+  "deals_removed": [],
+  "bestseller_deals": null
+}
+```
+
+### Response Description
+
+param | type | description
+----- | ---- | -----------
+shipping_address.id | integer | The shipping address' unique ID
+shipping_address.name | string | Name of the shipping address
+shipping_address.address_line | string | The shipping address
+shipping_address.state | string | The state where the address is located
+shipping_address.area | string | The area within the selected state
+shipping_address.landmark | string | The landmark for the shipping address
+
+## Create User
+
+User information must be provided at checkout
+
+> For a cart with shipping item, shipping address must be provided before shipping information.
+
+### HTTP Request
+
+`POST /carts/<cart_id>/user`
+
+### Body Parameters
+
+param | type | reqiured | description
+----- | ---- | -------- | -----------
+user.firstname | string | true | The user's name
+user.mobile | string | true | The user's mobile number. Format is 0xxxxxxxxxx
+user.email | string | true | The user's email address
+
+### Sample Response
+
+```json
+{
+  "success": true,
+  "user": {
+    "id": 346316,
+    "firstname": "Anybody",
+    "lastname": null,
+    "mobile": "07012345678",
+    "email": "test69@email.com",
+    "updated_at": "2018-07-20T16:26:53.052+01:00",
+    "balance": "0.0",
+    "fb_id": null,
+    "confirmed_at": null,
+    "gender": null,
+    "salary_bracket": null,
+    "age_bracket": null,
+    "profession": null
+  }
+}
+```
+
+### Response Description
+
+params | type | description
+------ | ---- | -----------
+user.id | integer | The user's unique ID
+user.firstname | string | The user's first name
+user.mobile | integer | The user's mobile number
+user.email | integer | The user's email address
+
+The response for request `GET /carts/<cart_id>` for a cart with a user
+
+```json
+{
+  "success": true,
+  "cart": {
+    "id": 270,
+    "cart_sub_total": 250,
+    "error_messages": "",
+    "includes_shipping_item": true,
+    "discounted_amount": 0,
+    "cart_items_count": 1,
+    "shipping_address": {
+      "address_line": "19 Taike Street",
+      "area": "Ikeja",
+      "global": false,
+      "id": 588,
+      "landmark": "Love All Street",
+      "name": "Oluwasegun",
+      "state": "Lagos"
+    },
+    "user": {
+      "email": "test69@email.com",
+      "mobile": "07032630555",
+      "mobile_verified": false
+    },
+    "cart_items": [<cart_items>]
+  },
+  "deals_removed": [],
+  "bestseller_deals": null
+}
+```
