@@ -1205,3 +1205,52 @@ The response for request `GET /carts/<cart_id>` for a cart with a user
   "bestseller_deals": null
 }
 ```
+
+## Cart Payment Summary
+
+Returns a summary of the cart including the total value of the item, shipping charges and total amount to be paid.
+
+### HTTP Request
+
+`GET /carts/<cart_id>/payment_options`
+
+### URL Params
+
+param | type | description
+----- | ---- | -----------
+cart_id | integer | The cart's unique ID
+
+### Sample Response
+
+```json
+{
+  "success": true,
+  "sub_total": 41984,
+  "shipping_charges": 20850,
+  "total_amount": 62834,
+  "is_shippable": true,
+  "cart": {
+    "id": 50,
+    "cart_sub_total": 41984,
+    "error_messages": "",
+    "includes_shipping_item": true,
+    "discounted_amount": 0,
+    "cart_items_count": 3,
+    "shipping_address": null,
+    "user": null,
+    "cart_items": [<cart_items>]
+  },
+  "deals_removed": [],
+  "bestseller_deals": null
+}
+```
+
+### Response Description
+
+param | type | description
+----- | ---- | -----------
+success | boolean |
+sub_total | float | The total value of the items in the cart
+shipping_charges | float | The total shipping charges for the shippable items in the cart
+total_amount | float | The total amount expected to be paid. It is the sum of `sub_total` and `shipping_charges`.
+is_shippable | boolean | Indicates if there's at least a shippable item in the cart. If `true`, the user is expected to provide a shipping address
