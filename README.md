@@ -1254,3 +1254,152 @@ sub_total | float | The total value of the items in the cart
 shipping_charges | float | The total shipping charges for the shippable items in the cart
 total_amount | float | The total amount expected to be paid. It is the sum of `sub_total` and `shipping_charges`.
 is_shippable | boolean | Indicates if there's at least a shippable item in the cart. If `true`, the user is expected to provide a shipping address
+
+
+## Complete Order
+
+Request to notify us when a user completes their order
+
+### HTTP Request
+
+`POST /carts/<cart_id>/complete`
+
+### URL Parameters
+
+param | type | description
+----- | ---- | -----------
+cart_id | integer | The cart's unique ID
+
+### Body Parameters
+
+param | type | reqiured | description
+----- | ---- | -------- | -----------
+amount | float | true | The total cost of the order, including shipping fee
+order_reference | string | true | A unique identifier for the order. Each request must come with a unique order reference
+
+### Sample Response
+
+```json
+{
+  "success": true,
+  "order_id": 1135390,
+  "errors": null,
+  "cart": null,
+  "deals_removed": [],
+  "bestseller_deals": null
+}
+```
+
+param | type | description
+----- | ---- | -----------
+success | boolean | The success/failure status of the request. `true` for a successful request, `false` other wise.
+order_id | integer | The order's unique ID. The ID is needed to get the order details
+
+
+## Order Details
+
+Returns the details of an order. After a successful order placement, the order ID in the response can be used to get the details of the order.
+
+```json
+{
+  "order": {
+    "id": 138,
+    "order_number": "15320140382547",
+    "total_price": 124000,
+    "sub_total": 124000,
+    "user": {
+      "name": "Anybody",
+      "mobile": "07032830550",
+      "mobile_verified": false
+    },
+    "line_items": [
+      {
+        "unit_price": 120000,
+        "deal": {
+          "short_title": "iPhone",
+          "permalink": "iphone",
+          "category_name": "Cameras",
+          "sku_number": "SL00000019",
+          "expiration_date": "31/08/2018"
+        },
+        "variant": {
+          "option_value_text": "",
+          "sku_number": "SL00000019"
+        },
+        "cancelled": false,
+        "quantity": 1,
+        "price": 120000
+      },
+      {
+        "unit_price": 4000,
+        "deal": {
+          "short_title": "Dooo",
+          "permalink": "dooo",
+          "category_name": "Computers & Networking",
+          "sku_number": "SL00000010",
+          "expiration_date": "31/12/2018"
+        },
+        "variant": {
+          "option_value_text": "",
+          "sku_number": "SL00000010"
+        },
+        "cancelled": false,
+        "quantity": 1,
+        "price": 4000
+      }
+    ],
+    "paid": true,
+    "status": "Released",
+    "created_at": "19/07/18",
+    "shipping_charges": 0,
+    "cod_charges": null,
+    "shipping_address": {
+      "id": 586,
+      "name": "Oluwasegun",
+      "address_line": "19 Taike Street",
+      "landmark": "Love All Street",
+      "area": "Ikeja",
+      "state": "Lagos"
+    },
+    "payment_mode": ""
+  },
+  "success": true,
+  "error_message": null
+}
+```
+
+If order is not found
+
+```json
+{
+  "order": null,
+  "success": false,
+  "error_message": "Order Not Found"
+}
+```
+
+### Response Description
+
+param | type | description
+----- | ---- | -----------
+success | boolean | The success/failure status of the request. `true` for a successful request, `false` otherwise.
+error_message | string | Error message
+order.id | integer | The order's unique Id
+order.order_number | string | The order's unique number
+order.total_price | float | The total cost of the order, including shipping charges
+order.sub_total | float | The total cost of the order, excluding shipping charges
+order.paid | boolean | Indicates if the order was paid for (true) or not (false)
+order.status | string | The status of the order
+order.created_at | string | The date the order was created
+order.shipping_address |  | The order shipping address
+order.line_items | array[line_item] | List of bought items
+line_item.unit_price | float | The unit price of each item
+line_item.cancelled | boolean | Indicates if the item is cancelled (true) or not (false)
+line_item.quantity | integer | The quantity of each item bought
+line_item.price | float | The total price of each item. The product of unit_price and quantity
+line_item.deal |  | The details of the item
+line_item.deal.sku_number | string | The SKU number of the item
+line_item.deal.category_name | string | The category of the item
+line_item.deal.expiration_date | string | The date the item will expire. The coupons for all service deals must be used before this date
+line_item.variant |  | The variant of the item
+line_item.variant.sku_number | string | The SKU number of the item
