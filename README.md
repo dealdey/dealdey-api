@@ -7,10 +7,10 @@ All API requests are authenticated by an access key. Thus access token will be a
 
 `GET /deals`
 
-### Query Params
+### Query Parameters
 
-params | type |required | description
---------- | ------- | ------- | -------
+param | type | required | description
+----- | ---- | -------- | -----------
 acess_key | string | true | Client access key for authenticating all API requests
 
 ### Sample Response for Failed Authentication
@@ -33,7 +33,7 @@ acess_key | string | true | Client access key for authenticating all API request
 ### Query Parameters
 
 param | type | default | required | description
------ | ---- | ------- | -------- | ------
+----- | ---- | ------- | -------- | -----------
 acess_key | string | - | true | Client access key for authenticating all API requests
 page | integer | 1 | false | The page number
 per_page | integer | 10 | false | Maximum number of deals per page
@@ -85,7 +85,7 @@ state_id | integer | 8 | false | ID of the state where the deal is available
 }
 ```
 
-params | type | description
+param | type | description
 ------ | ---- | -----------
 success | boolean | Status of the response
 cart_items_count | integer | Number of items in the current cart
@@ -265,7 +265,7 @@ acess_key | string | - | true | Client access key for authenticating all API req
 }
 ```
 
-params | type | description
+param | type | description
 ------ | ---- | -----------
 success | boolean | Status of the response
 deal.id | integer | The deal's unique ID
@@ -396,8 +396,8 @@ For deal without multiple options. _You would not have to make this type of requ
 
 ### Response Description
 
-params | type | description
------- | ---- | -----------
+param | type | description
+----- | ---- | -----------
 success | boolean | Status of the response. `true` if there's no error, `false` otherwise.
 error_message | null,string | Error message. `null` if there's no error
 deal.id | integer | The deal's unique ID
@@ -489,8 +489,8 @@ acess_key | string | - | true | Client access key for authenticating all API req
 
 ### Response Description
 
-params | type | description
------- | ---- | -----------
+param | type | description
+----- | ---- | -----------
 success | boolean | Status of the response. `true` if there's no error, `false` otherwise.
 cart.id | integer | The cart's unique ID
 cart.cart_sub_total | integer | The total value of the items in the cart. `0` for empty cart.
@@ -574,8 +574,8 @@ acess_key | string | - | true | Client access key for authenticating all API req
 }
 ```
 
-params | type | description
------- | ---- | -----------
+param | type | description
+----- | ---- | -----------
 success | boolean | Status of the response. `true` if there's no error, `false` otherwise.
 cart.error_messages | null,string | Error message. `null` if there's no error
 cart.id | integer | The cart's unique ID
@@ -807,13 +807,13 @@ See error at `cart.error_messages`
 
 `POST /cart_items/<cart_item_id>/remove`
 
-### URL Params
+### URL Parameters
 
 param | type | description
 ----- | ---- | -----------
 cart_id | integer | The cart's unique ID
 
-### Query Params
+### Query Parameters
 
 param | type | default | required | description
 ----- | ---- | ------- | -------- | ------
@@ -852,13 +852,13 @@ If the item is not in the cart.
 
 `GET /carts/<cart_id>`
 
-### URL Params
+### URL Parameters
 
 param | type | description
 ----- | ---- | -----------
 cart_id | integer | The cart's unique ID
 
-### Query Params
+### Query Parameters
 
 param | type | default | required | description
 ----- | ---- | ------- | -------- | ------
@@ -900,20 +900,20 @@ Use this request to choose a pickup location for the cart item
 
 `POST /carts/<cart_id>/cart_items/<cart_item_id>/change_pickup_location`
 
-### URL Params
+### URL Parameters
 
 param | type | description
 ----- | ---- | -----------
 cart_id | integer | The cart's unique ID
 cart_item_id | integer | The cart item's unique ID
 
-### Query Param
+### Query Parameters
 
 param | type | default | required | description
 ----- | ---- | ------- | -------- | ------
 acess_key | string | - | true | Client access key for authenticating all API requests
 
-### Body Param
+### Body Parameters
 
 param | type | reqiured | description
 ----- | ---- | -------- | -----------
@@ -990,8 +990,8 @@ pickup_location_id | integer | true | The pickup location's unique ID
 
 ### Response Description
 
-params | type | description
------- | ---- | -----------
+param | type | description
+----- | ---- | -----------
 cart_item.pickup_location.id | integer | The assigned pickup location's unique ID
 cart_item.pickup_location.address | string | The address of the assigned pickup location
 cart_item.deal.pickup_locations | array[pickup_location] | A list of all possible redemption locations for the deal
@@ -1166,8 +1166,8 @@ user.email | string | true | The user's email address
 
 ### Response Description
 
-params | type | description
------- | ---- | -----------
+param | type | description
+----- | ---- | -----------
 user.id | integer | The user's unique ID
 user.firstname | string | The user's first name
 user.mobile | integer | The user's mobile number
@@ -1214,7 +1214,7 @@ Returns a summary of the cart including the total value of the item, shipping ch
 
 `GET /carts/<cart_id>/payment_options`
 
-### URL Params
+### URL Parameters
 
 param | type | description
 ----- | ---- | -----------
