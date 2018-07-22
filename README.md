@@ -1,6 +1,7 @@
 # DEALDEY THIRD-PARTY API DOCUMENTATION
 
 ## Authentication
+
 All API requests are authenticated by an access key. Thus access token will be assigned to you.
 
 ### HTTP Request
@@ -23,6 +24,99 @@ acess_key | string | true | Client access key for authenticating all API request
   "code": 101
 }
 ```
+
+## State Listings
+
+A list of all the states in Nigeria
+
+### HTTP Request
+
+`GET /states`
+
+### Sample Response
+
+```json
+{
+  "success": true,
+  "states": [
+    {
+      "id": 8,
+      "name": "Lagos",
+      "highlight": true
+    },
+    {
+      "id": 9,
+      "name": "Abuja",
+      "highlight": true
+    },
+    {
+      "id": 14,
+      "name": "Adamawa",
+      "highlight": false
+    },
+    ...
+  ]
+}
+```
+
+### Response Description
+
+param | type | description
+----- | ---- | -----------
+success | boolean |
+states | array[state] | List of states in Nigeria
+state.id | integer | The state's unique ID
+state.name | string | The name of the state
+state.highlight | boolean | Indicates if the state is a top state (true) or not (false). Top states are given higher priority
+
+
+## Area Listings
+
+List of areas in a state
+
+### HTTP Requests
+
+`GET /areas`
+
+### Query Parameter
+
+param | type | reqiured | description
+----- | ---- | -------- | -----------
+state_id | integer | true | The state ID
+
+### Sample Response
+
+With `state_id` present, it returns the areas in the state with the state ID. If `state_id` is not present, it returns areas in Lagos.
+
+```json
+{
+  "success": true,
+  "areas": [
+    {
+      "id": 44,
+      "state_id": 9,
+      "name": "Maitama",
+    },
+    {
+      "id": 45,
+      "state_id": 9,
+      "name": "Garki",
+    },
+    ...
+  ]
+}
+```
+
+### Response Description
+
+param | type | description
+----- | ---- | -----------
+success | boolean |
+areas | array[area] | List of areas in state with the state ID
+area.id | integer | The area's unique ID
+area.state_id | integer | The state's unique ID
+area.name | string | The name of the area
+
 
 ## Deal Listings
 
@@ -86,7 +180,7 @@ state_id | integer | 8 | false | ID of the state where the deal is available
 ```
 
 param | type | description
------- | ---- | -----------
+----- | ---- | -----------
 success | boolean | Status of the response
 cart_items_count | integer | Number of items in the current cart
 deals | array[deal] | List of deals
