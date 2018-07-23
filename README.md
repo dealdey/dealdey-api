@@ -204,6 +204,70 @@ deals.merchant | object | Deal seller
 deals.merchant.merchant_id | integer | ID of the seller
 deals.merchant.merchant_name | string | Seller's name
 
+## Category Listings
+
+Returns a list of all categories of available deals.
+
+The hierarchy of categories are as follows;
+
+Categories | Description
+---------- | -----------
+root | These are our top level categories. Currently, we have 4 of them - City, Home, Fashion and Gadgets.
+sub | These are our second level categories. They are children to the root categories. Each sub category belongs to only one of the root categories.
+leaf | These are our third and last level categories. They are children to sub categories. These are the categories directly related to deals. In other words, the category_id on a deal is the id of a leaf category. Each leaf category belongs to only one of the sub categories.
+
+### HTTP Request
+
+`GET /categories`
+
+### Sample Response
+
+> 200 OK
+
+```json
+{
+  "categories": [
+    {
+      "id": 41,
+      "name": "City",
+      "permalink": "city-travel",
+      "sub_categories": [
+        {
+          "id": 3,
+          "name": "Events & Activities",
+          "permalink": "events-activities",
+          "leaf_categories": [
+            {
+              "id": 224,
+              "name": "Theater & Plays",
+              "permalink": "theater-plays",
+              "live_deals_count": 3
+            },
+            ...
+          ]
+        },
+        ...
+      ]
+    },
+    ...
+  ]
+}
+```
+
+### Response Description
+
+param | type | description
+----- | ---- | -----------
+success | boolean | Status of the response
+categories | array[category] | List of root categories
+category.sub_categories | array[category] | List of sub categories
+category.leaf_categories | array[category] | List of leaf categories
+category.id | integer | The category's unique ID
+category.name | string | The category's name
+category.permalink | string | The category's unique permalink
+category.live_deals_count | integer | The number of live deals for a leaf category
+
+
 ## Deal Listings per Category
 
 Returns a list of deals per category.
