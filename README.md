@@ -74,7 +74,7 @@ state.highlight | boolean | Indicates if the state is a top state (true) or not 
 
 List of areas in a state
 
-### HTTP Requests
+### HTTP Request
 
 `GET /areas`
 
@@ -197,9 +197,9 @@ deals.adult_content | boolean | Indicates the deal is for people from 18years up
 deals.average_rating | integer | Average rating of the deal
 deals.least_priced_variant | object | The option with the least price
 deals.least_priced_variant.id | integer | ID of the option
-deals.least_priced_variant.discounted_price | decimal | Image URL of the deal
-deals.least_priced_variant.list_price | decimal | Image URL of the deal
-deals.least_priced_variant.variants_have_same_price | integer | Image URL of the deal
+deals.least_priced_variant.discounted_price | decimal | The deal option's discounted price. This is the amount the customer is charged.
+deals.least_priced_variant.list_price | decimal | The deal's original price
+deals.least_priced_variant.variants_have_same_price | integer | Indicates if the option has the same price as the deal (1) or not (0).<br>Note that `variants_have_same_price` is `0` for deals with multiple options but `1` for deals with no options
 deals.merchant | object | Deal seller
 deals.merchant.merchant_id | integer | ID of the seller
 deals.merchant.merchant_name | string | Seller's name
@@ -433,7 +433,7 @@ deal.is_product_deal | boolean | Indicates if the item is a product (true) or se
 deal.shippable | boolean | Indicates if the item is shippable or not
 deal.address_line1 | string | Line 1 of the deal address
 deal.address_line2 | string | Line 2 of the deal address
-deal.discounted_price | decimal | The deal's discounted price
+deal.discounted_price | decimal | The deal's discounted price. This is the amount the customer is charged.
 deal.variants_have_same_price | boolean | Indicates if the deal has multiple options (false) or not (true)
 deal.list_price | decimal | The deal's original price
 deal.percent_discount | integer | The deal's percentage discount
