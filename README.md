@@ -93,6 +93,9 @@
   * [Body Parameters](#body-parameters-3)
   * [Sample Response](#sample-response-14)
 - [Order Details](#order-details)
+  * [HTTP Request](#http-request-15)
+  * [URL Parameters](#url-parameters-6)
+  * [Sample Response](#sample-response-15)
   * [Response Description](#response-description-9)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
@@ -1554,6 +1557,18 @@ order_id | integer | The order's unique ID. The ID is needed to get the order de
 ## Order Details
 
 Returns the details of an order. After a successful order placement, the order ID in the response can be used to get the details of the order.
+
+### HTTP Request
+
+`GET /orders/<order_id>`
+
+### URL Parameters
+
+param | type | description
+----- | ---- | -----------
+order_id | integer | The order's unique ID. This is the order_id in the response for "`POST /carts/<cart_id>/complete`" after a successful order completion
+
+### Sample Response
 
 ```json
 {
