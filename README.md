@@ -770,7 +770,7 @@ Adding an item (or deal) to the cart.
 
 ### HTTP Request
 
-`POST carts/<cart_id>/cart_items`
+`POST /carts/<cart_id>/cart_items`
 
 ### URL Parameter
 
@@ -783,6 +783,14 @@ cart_id | integer | The cart's unique ID
 param | type | default | required | description
 ----- | ---- | ------- | -------- | ------
 acess_key | string | - | true | Client access key for authenticating all API requests
+
+### Body Parameters
+
+param | type | reqiured | description
+----- | ---- | -------- | -----------
+deal_id | integer | true | The unique ID of the deal.
+variant_id | integer | true | The unique ID of the variant option of the deal
+cart_item.quantity | integer | true | The quantity of the deal to be added to the cart. It's usually 1
 
 ### Sample Response
 
@@ -832,6 +840,8 @@ acess_key | string | - | true | Client access key for authenticating all API req
 }
 ```
 
+### Response Description
+
 param | type | description
 ----- | ---- | -----------
 success | boolean | Status of the response. `true` if there's no error, `false` otherwise.
@@ -867,13 +877,14 @@ best_sellers | null,array[deal] | List of best selling deals. `null` if there ar
 
 ### HTTP Request
 
-`POST /cart_items/<cart_item_id>/change_quantity`
+`POST /carts/<cart_id>/cart_items/<cart_item_id>/change_quantity`
 
-### URL Parameter
+### URL Parameters
 
 param | type | description
 ----- | ---- | -----------
 cart_id | integer | The cart's unique ID
+cart_item_id | integer | The cart item's unique ID
 
 ### Query Parameter
 
@@ -889,7 +900,7 @@ quantity | integer | - | true | The new quantity of the cart item. It must be gr
 
 ### Sample Responses
 
-For `quantity = 5` and `cart_id = 4442076`, The quantity will be updated to 5. Check `cart_item.quantity`.
+For `quantity = 5` and `cart_item_id = 4442076`, The quantity will be updated to 5. Check `cart_item.quantity`.
 
 ``` json
 {
@@ -1063,13 +1074,14 @@ See error at `cart.error_messages`
 
 ### HTTP Request
 
-`POST /cart_items/<cart_item_id>/remove`
+`POST /carts/<cart_id>/cart_items/<cart_item_id>/remove`
 
 ### URL Parameters
 
 param | type | description
 ----- | ---- | -----------
 cart_id | integer | The cart's unique ID
+cart_item_id | integer | The cart item's unique ID
 
 ### Query Parameters
 
