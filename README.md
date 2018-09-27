@@ -684,6 +684,7 @@ option.option_type | string | The type of option for the variant, e.g. Color, Si
 option.option_value | string | The value of the type of option. For example<br> - Color could have option value of black, red, blue, white etc <br> - Size could have option value of L, XL, 42, 44, 8 etc <br> - Option could have option value of Option 1, Option 2, Option 3
 
 ## Create Cart
+Once the cart is created, the returned cart id can be used for every other cart-related requests
 
 ### HTTP REQUEST
 
