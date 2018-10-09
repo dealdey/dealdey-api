@@ -1398,9 +1398,9 @@ shipping_address.landmark | string | The landmark for the shipping address
 
 ## Create User
 
-User information must be provided at checkout
+User information must be provided at checkout.
 
-> For a cart with shipping item, shipping address must be provided before shipping information.
+> For a cart with shipping item, shipping address must be provided before user information.
 
 ### HTTP Request
 
